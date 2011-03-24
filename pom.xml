@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.neo4j.laboratory</groupId>
+  <artifactId>aggregation</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+  
+  <parent>
+    <groupId>org.neo4j</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>8-SNAPSHOT</version>
+  </parent>
+
+  <name>aggregation</name>
+  <url>https://svn.neo4j.org/laboratory/components/aggregation/</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bundle.namespace>org.neo4j.laboratory.aggregation</bundle.namespace>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j</artifactId>
+      <version>1.2.M02</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.neo4j</groupId>
+          <artifactId>neo4j-udc</artifactId>
+        </exclusion>
+      </exclusions>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>1.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.ops4j</groupId>
+        <artifactId>maven-pax-plugin</artifactId>
+        <version>1.4</version>
+        <configuration>
+          <framework>felix</framework>
+          <profiles>compendium,log</profiles>
+          <provision>
+            <param>scan-features:mvn:org.neo4j.apoc-bundle/org.neo4j.neo.karaf/1.0-SNAPSHOT/xml/features!/neo4j-core</param>
+          </provision>
+
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
